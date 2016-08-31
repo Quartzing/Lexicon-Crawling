@@ -70,7 +70,7 @@ First of all, we need to mimick the same data format to post request to the serv
               'ResetPaging':'false',
               'startRow':startRow,
               'ODA_Parent':'%7B%22category%22%3A%22Lexicon%22%2C%22name%22%3A%22Search%22%2C%22label%22%3A%22Search%22%7D'
-              }
+            }
   response = requests.post(
         url='http://lexicon.ft.com/UpdateResultTerms',
         data=postdata,
