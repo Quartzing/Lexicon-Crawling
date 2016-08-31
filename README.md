@@ -110,14 +110,14 @@ parallelProcess(requestSearchResults,range(0,maxNumPage*termsPerPage)[0::termsPe
 parallelProcess(parseTermPage,termlinklist)
 ```
 
-Although my laptop only has 4 cores, the process has been speed up for much more than 4 times: the total fetching time has been lowered down to less than 20min. The reason is that there are always some links which is much slower to fetch. If there is only one thread, every other following fetching task will be blocked by those links; however with 4 threads, there will be fast lanes for those fast links to go through.
+Although my laptop only has 4 cores, the process has been speed up for much more than 4 times: the total fetching time has been lowered down to less than 15min. The reason is that there are always some links which is much slower to fetch. If there is only one thread, every other following fetching task will be blocked by those links; however with 4 threads, there will be fast lanes for those fast links to go through.
 
 We can then sort the term list by the terms:
 ```Python
 # sort
 termlist = sorted(termlist,key=lambda x: x[0])
 ```
-
+Then store the terms and explanations in csv file. 
 
 
 
