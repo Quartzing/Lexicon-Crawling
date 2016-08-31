@@ -4,6 +4,7 @@ import json
 import csv
 import threading
 import re
+import time
 
 # prepare storage list
 termlist = []
@@ -11,7 +12,8 @@ failurelist = []
 termlinklist = []
 # constants
 termsPerPage = 10
-maxNumPage = 150
+startPage = 0
+endPage = 1500
 
 # fetch one page and get term links
 def requestSearchResults(startRow):
@@ -82,12 +84,24 @@ def saveCSVFile(filename,listname,comment):
         print(comment+' are saved to file '+filename+'.');
         f.close()
     
-    
+start_time = time.time()
+
 # get term link list
-parallelProcess(requestSearchResults,range(0,maxNumPage*termsPerPage)[0::termsPerPage])
+parallelProcess(requestSearchResults,range(startPage*termsPerPage,endPage*termsPerPage)[0::termsPerPage])
     
 # get terms and explanations
 parallelProcess(parseTermPage,termlinklist)
+
+# try failed term again
+for termlink in failurelist:
+    parseTermPage(termlink)
+
+# sort
+termlist = sorted(termlist,key=lambda x: x[0])
+
+# count time elapsed
+elapsed_time = time.time() - start_time
+print('Times elapsed: '+str(elapsed_time)+' second')
 
 print('Totally '+str(len(termlist))+' terms and their explanations are fetched.')
 # save to csv file
@@ -95,7 +109,6 @@ saveCSVFile('output.csv',termlist,'Terms and explanations')
 saveCSVFile('log.csv',failurelist,'Failure logs')
 
 
-        
 
 
 	

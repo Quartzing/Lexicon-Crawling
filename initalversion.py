@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import string
 import csv
+import re
 
 # loop start
 # prepare storage list
@@ -34,6 +35,8 @@ for termlink in termlinklist:
     term = titleString[14:]
     # get term explanation
     explanation = termSoup.find_all('div',{'class':'definition'})[0].text       
+    # remove unnecessary characters
+    explanation = re.sub('[^a-zA-Z0-9-_*.,;:+\/\&\@\"\'\(\)\$\%\[\]]', ' ', explanation)
     # parse term link
     termlist.append([term,explanation])
     

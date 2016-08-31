@@ -7,7 +7,7 @@ import re
 
 # fetch one page and get term links
 def requestSearchResults(startRow):
-    print('Row: '+startRow)
+    print('Row: '+str(startRow))
     postdata={'searchTex':'A',
               'searchBy':'Letter',
               'ResetPaging':'false',
@@ -62,9 +62,6 @@ def parseTermPage(termlink):
         print('Fetching failed: '+ termlink)
         return False
         
-
-
-
 def saveCSVFile(filename,listname,content):
     with open(filename, "w") as f:
         writer = csv.writer(f)
@@ -75,12 +72,12 @@ def saveCSVFile(filename,listname,content):
 # loop start
 # constants
 termsPerPage = 10
-maxNumPage = 5
+maxNumPage = 1201
 # prepare storage list
 termlist = []
 failurelist = []
 termlinklist = []
-for i in range(0,maxNumPage):
+for i in range(1200,maxNumPage):
     startRow = i * termsPerPage  
     terms = requestSearchResults(startRow)
     if not terms:
@@ -94,6 +91,8 @@ for termlink in termlinklist:
     success = parseTermPage(termlink)
     if not success:
         failurelist.append([termlink])
+        
+
     
 
 # output final status
