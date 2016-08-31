@@ -1,6 +1,6 @@
 # Python-Crawling
 
-It is my first time to do the crawling on Python. Recently a friend asked if I can get all of the terms and their explanations from lexicon.ft.com. After taking a look at its website I found that the term pages are indexed alphabetically. Seems like this is not a hard task.
+Here is an example of Python crawling. The task is to get all of the terms and their explanations from lexicon.ft.com. After taking a look at its website I found that the term pages are indexed alphabetically. Now let's get started.
 
 ##Initial plan:
 After checking the url of the term pages, the followings are found:
@@ -110,7 +110,7 @@ parallelProcess(requestSearchResults,range(0,maxNumPage*termsPerPage)[0::termsPe
 parallelProcess(parseTermPage,termlinklist)
 ```
 
-Although my laptop only has 4 cores, the process has been speed up for much more than 4 times: the total fetching time has been lowered down to less than 20min. The reason is that there are always some links will be much slower to fetch. If there is only one thread, every fetching task will be blocked by those links; however with 4 threads, there will be fast lanes for those fast links to go through.
+Although my laptop only has 4 cores, the process has been speed up for much more than 4 times: the total fetching time has been lowered down to less than 20min. The reason is that there are always some links which is much slower to fetch. If there is only one thread, every other following fetching task will be blocked by those links; however with 4 threads, there will be fast lanes for those fast links to go through.
 
 
 
