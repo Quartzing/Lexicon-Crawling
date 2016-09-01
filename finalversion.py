@@ -34,7 +34,7 @@ def requestSearchResults(startRow):
     # get parsed search results
     soup = BeautifulSoup(responseJSON['html'],'html.parser')    
     # get all links
-    # terms = [];
+
     for link in soup.find_all('a'):
         termlink = link.get('href')
         # find term link from them
@@ -43,8 +43,7 @@ def requestSearchResults(startRow):
                     termlink = 'http://lexicon.ft.com/'+termlink
             termlinklist.append(termlink)
     
-   
-    
+
 # get terms and explanation from a term link
 def parseTermPage(termlink):
     
@@ -67,7 +66,7 @@ def parseTermPage(termlink):
         termlist.append([term,explanation])
         print(termlink)
     except:
-        print('Fetching failed: '+ termlink)
+        print('Fetching failed: ' + termlink)
         failurelist.append([termlink])
 
 def parallelProcess(targetfun,source):
@@ -81,7 +80,7 @@ def saveCSVFile(filename,listname,comment):
     with open(filename, "w") as f:
         writer = csv.writer(f)
         writer.writerows(listname)    
-        print(comment+' are saved to file '+filename+'.');
+        print(comment+' are saved to file '+filename+'.')
         f.close()
     
 start_time = time.time()
@@ -108,7 +107,3 @@ print('Totally '+str(len(termlist))+' terms and their explanations are fetched.'
 saveCSVFile('output.csv',termlist,'Terms and explanations')
 saveCSVFile('log.csv',failurelist,'Failure logs')
 
-
-
-
-	
