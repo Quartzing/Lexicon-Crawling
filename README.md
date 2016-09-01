@@ -1,4 +1,4 @@
-# Python-Crawling
+# Web Crawling/Scraping （Python 3.5.1）
 
 Here is an example of Python crawling. The task is to get all of the terms and their explanations from lexicon.ft.com. After taking a look at its website I found that the term pages are indexed alphabetically. Now let's get started.
 
